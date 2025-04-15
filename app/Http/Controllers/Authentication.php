@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Hash;
@@ -32,7 +33,7 @@ class Authentication extends Controller
         $otp = rand(100000, 999999);
         $request->session()->put('otp', $otp);
         $request->session()->put('otp_email', $user->email);
-
+    
         \Log::info("Generated OTP: $otp for " . $user->email);
     
         try {
@@ -41,19 +42,16 @@ class Authentication extends Controller
                         ->subject('Login OTP Verification');
             });
     
-            if ($request->expectsJson()) {
-                return response()->json([
-                    'message' => 'OTP sent to your email.',
-                    'redirect' => route('verify-otp.show')
-                ]);
-            } else {
-                return redirect()->route('verify-otp.show')->with('success', 'OTP sent to your email.');
-            }
+            return response()->json([
+                'success' => true,
+                'message' => 'OTP sent to your email.',
+                'redirect' => route('verify-otp.show'),
+            ]);
     
         } catch (\Exception $e) {
             return $this->responseError($request, 'Failed to send OTP. Please check your internet connection and try again.');
         }
-    }
+    }    
     
     private function responseError(Request $request, $message)
     {
@@ -125,11 +123,24 @@ class Authentication extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'OTP verified successfully!',
-                'redirect' => route('create_ticket.show'),
+                'redirect' => route('tickets.index'), // 🚀 Redirect to the tickets page
             ]);
         }
     
-        return redirect()->route('create_ticket.show')->with('success', 'OTP verified successfully!');
+        return redirect()->route('tickets.index')->with('success', 'OTP verified successfully!');
+    }
+    
+    public function index(Request $request)
+    {
+        $email = $request->session()->get('email');
+    
+        if (!$email) {
+            return redirect('/')->with('fail', 'Session expired. Please login again.');
+        }
+    
+        $tickets = Ticket::where('email', $email)->get();
+    
+        return view('index', compact('tickets', 'email'));
     }    
     
 }

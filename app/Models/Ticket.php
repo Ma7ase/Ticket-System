@@ -15,6 +15,7 @@ class Ticket extends Model
         'id',
         'priority',
         'title',
+        'email',
         'issue_type',
         'date',
         'issue_description',

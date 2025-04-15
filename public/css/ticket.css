@@ -424,6 +424,37 @@ input[type="radio"]:checked + .sector-option:hover {
   z-index: 2;
 }
 
+/* Custom table styles */
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border-bottom: 0.2px solid rgba(221, 221, 221, 0.5);
+  padding: 8px;
+  color: white;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #151521;
+}
+
+#customers tr:nth-child(odd) {
+  background-color: #151521;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #b06ba9;
+  color: white;
+}
+
 /* Media query for smaller screens */
 @media (max-width: 768px) {
   .image-container {

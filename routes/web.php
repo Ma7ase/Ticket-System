@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\createTicket;
+use App\Http\Controllers\CreateTicket;
 use App\Http\Controllers\Authentication;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/create_ticket', [createTicket::class, 'addTicket'])->name('create.ticket');
+Route::post('/create_ticket', [CreateTicket::class, 'addTicket'])->name('create.ticket');
 Route::post('login-user',[Authentication::class,'loginUser'])->name('login-user');
 
 Route::get('/verify-otp', function () {
@@ -20,3 +20,5 @@ Route::post('/verify-otp', [Authentication::class, 'verifyOtp'])->name('verify-o
 Route::get('/create_ticket', function () {
     return view('create_ticket'); // assuming your view is named 'verify-otp'
 })->name('create_ticket.show');
+
+Route::get('/tickets', [Authentication::class, 'index'])->name('tickets.index');

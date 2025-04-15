@@ -36,6 +36,7 @@ class CreateTicket extends Controller
             'date' => $request->date,
             'issue_description' => $request->issue_description,
             'documents' => $request->file('documents')->store('documents', 'public'),
+            'email' => $request->session()->get('email'), // ← get it from session
         ];
     
         try {
