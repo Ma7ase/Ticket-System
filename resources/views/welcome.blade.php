@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <head> 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Ticket</title>
@@ -45,14 +45,13 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" id="email" name="email" placeholder="Enter Email" required />
-                        <span style="color: red;">@error('email') {{ $message }} @enderror</span>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" placeholder="Enter Password" required />
-                        <span style="color: red;">@error('password') {{ $message }} @enderror</span>
                     </div>
+                    <div class="form-message" style="color: red; margin-bottom: 10px;"></div>
                 </div>
             </div>
 

@@ -57,10 +57,11 @@ class Authentication extends Controller
     {
         if ($request->expectsJson()) {
             return response()->json([
+                'success' => false,
                 'message' => $message
             ], 422);
         }
-    
+        
         return back()->with('fail', $message);
     }
 

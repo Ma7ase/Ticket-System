@@ -47,6 +47,7 @@
                         <input type="text" id="otp" name="otp" placeholder="Enter OTP" required />
                         <span style="color: red;">@error('otp') {{ $message }} @enderror</span>
                     </div>
+                    <div class="form-message" style="color: red; margin-bottom: 10px;"></div>
                 </div>
             </div>
 
